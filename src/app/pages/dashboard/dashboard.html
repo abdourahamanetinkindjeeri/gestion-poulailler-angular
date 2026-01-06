@@ -1,0 +1,44 @@
+<div class="main-container">
+  <div class="row full-height no-flex-wrap">
+
+    <!-- Sidebar -->
+    <div class="card col-md-2 col-12 mr-2" *ngIf="showSidebar">
+      <div class="col pl-0 pr-0">
+        <div class="card mt-3 mb-2 border-none text-center">
+          <h4>Gestion de stock</h4>
+          <small class="form-text text-muted">By Ali Bouali</small>
+        </div>
+        <div>
+<!--          <app-menu></app-menu>-->
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="card pl-0 pr-0 background-grey border-none"
+         [ngClass]="showSidebar ? 'col-md-10 col-12' : 'col-md-12 col-12'">
+      <div class="col pl-0 pr-0 d-flex flex-column justify-content-between h-100">
+
+        <!-- Header avec bouton -->
+        <div class="card p-3 min-height-80 mb-2 d-flex justify-content-center align-items-center">
+          <button class="btn btn-sm btn-primary"
+                  type="button"
+                  (click)="toggleSidebar()">
+            {{ showSidebar ? 'Masquer menu' : 'Afficher menu' }}
+          </button>
+        </div>
+
+        <!-- Main content -->
+        <div class="card mb-2 flex-grow-1">
+          <router-outlet></router-outlet>
+        </div>
+
+        <!-- Footer -->
+        <div class="card min-height-80">
+          footer
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

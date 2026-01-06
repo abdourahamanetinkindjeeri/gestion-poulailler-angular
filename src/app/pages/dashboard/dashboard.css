@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.full-height {
+  min-height: calc(100vh - 40px);
+}
+
+.no-flex-wrap {
+  flex-wrap: nowrap !important;
+}
+
+.background-grey {
+  background-color: #f5f5f5;
+}
+
+.border-none {
+  border: none !important;
+}
