@@ -1,1 +1,38 @@
-<p>menu works!</p>
+<div class="accordion" id="appMenuAccordion">
+  @for (menu of menuProperties; track menu.id) {
+    <div class="card">
+      <div class="card-header" id="menu{{menu.id}}">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapse' + menu.id"
+                  aria-expanded="true"
+                  [attr.aria-controls]="'collapse' + menu.id">
+            <i class="{{menu.icon}}"></i>&nbsp;
+            {{menu.title}}
+          </button>
+        </h2>
+      </div>
+
+      <div id="collapse{{menu.id}}"
+           class="collapse"
+           [attr.aria-labelledby]="'menu' + menu.id"
+           data-bs-parent="#appMenuAccordion">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            @for (sousMenu of menu.subMenu; track sousMenu.id) {
+              <li class="list-group-item"
+                  [ngClass]="{'text-white bg-primary': sousMenu.active}">
+                <a href="javascript:void(0);" (click)="navigate(sousMenu)" style="color: inherit;">
+                  <i class="{{sousMenu.icon}}"></i>&nbsp;
+                  {{sousMenu.title}}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  }
+</div>

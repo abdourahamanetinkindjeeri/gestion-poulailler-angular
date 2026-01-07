@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgClass, NgIf } from '@angular/common';  // <-- ajoute NgIf
+import { NgClass, NgIf } from '@angular/common';
+import {MenuComponent} from '../../composants/menu/menu';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, NgClass, NgIf], // <-- ajoute NgIf ici
+  imports: [RouterOutlet, NgClass, MenuComponent], // <-- ajoute NgIf ici
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
 })

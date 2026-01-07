@@ -2,17 +2,19 @@
   <div class="row full-height no-flex-wrap">
 
     <!-- Sidebar -->
-    <div class="card col-md-2 col-12 mr-2" *ngIf="showSidebar">
+    @if (showSidebar){
+    <div class="card col-md-2 col-12 mr-2">
       <div class="col pl-0 pr-0">
         <div class="card mt-3 mb-2 border-none text-center">
           <h4>Gestion de stock</h4>
           <small class="form-text text-muted">By Ali Bouali</small>
         </div>
         <div>
-<!--          <app-menu></app-menu>-->
+          <app-menu/>
         </div>
       </div>
     </div>
+    }
 
     <!-- Content -->
     <div class="card pl-0 pr-0 background-grey border-none"

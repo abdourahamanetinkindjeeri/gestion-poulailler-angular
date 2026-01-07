@@ -1,7 +1,8 @@
 export interface Menu{
-  id?:number;
+  id?:string;
   title?:string;
   icon?:string;
   url?:string;
-  submenu?:Array<Menu>;
+  active?: boolean;
+  subMenu?:Array<Menu>;
 }
