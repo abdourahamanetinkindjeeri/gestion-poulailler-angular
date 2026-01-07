@@ -1,0 +1,40 @@
+<aside class="sidebar" [class.collapsed]="collapsed">
+  <!-- HEADER -->
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-box"></i>
+      </div>
+      <div class="logo-text" *ngIf="!collapsed">
+        <h2>Gestion de stock</h2>
+        <p>By Ali Bouali</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="sidebar-nav">
+    <div class="nav-section" *ngFor="let section of navSections">
+      <div class="nav-section-title" *ngIf="!collapsed">{{ section.title }}</div>
+
+      <div class="nav-item"
+           *ngFor="let item of section.items"
+           [attr.title]="collapsed ? item.label : null">
+        <i [class]="item.icon"></i>
+        <span class="nav-label" *ngIf="!collapsed">{{ item.label }}</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FOOTER -->
+  <div class="sidebar-footer" *ngIf="!collapsed">
+    <div class="user-profile">
+      <div class="user-avatar">AB</div>
+      <div class="user-info">
+        <div class="user-name">Ali Bouali</div>
+        <div class="user-role">Administrateur</div>
+      </div>
+      <i class="fas fa-ellipsis-v" style="color: var(--text-muted)"></i>
+    </div>
+  </div>
+</aside>

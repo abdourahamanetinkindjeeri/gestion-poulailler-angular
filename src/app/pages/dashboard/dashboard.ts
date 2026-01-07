@@ -1,20 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NgClass, NgIf } from '@angular/common';
-import {MenuComponent} from '../../composants/menu/menu';
+import {Sidebar} from '../../composants/sidebar/sidebar';
+import {Header} from '../../composants/header/header';
+import {Content} from '../../composants/content/content';
+import {Footer} from '../../composants/footer/footer';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
-  imports: [RouterOutlet, NgClass, MenuComponent], // <-- ajoute NgIf ici
+  imports: [
+    Sidebar,
+    Header,
+    Content,
+    Footer
+  ],
   templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css'],
+  styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  showSidebar: boolean = true;
+
+  sidebarOpen = true; // true = ouvert, false = réduit
+  isDark = true;
 
   toggleSidebar() {
-    console.log('toggle sidebar');
-    this.showSidebar = !this.showSidebar;
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  toggleTheme() {
+    this.isDark = !this.isDark;
+    if (this.isDark) {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }
 }

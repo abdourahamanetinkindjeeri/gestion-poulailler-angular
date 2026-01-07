@@ -1,46 +1,13 @@
-<div class="main-container">
-  <div class="row full-height no-flex-wrap">
+<div class="dashboard">
+  <app-sidebar [collapsed]="!sidebarOpen"></app-sidebar>
 
-    <!-- Sidebar -->
-    @if (showSidebar){
-    <div class="card col-md-2 col-12 mr-2">
-      <div class="col pl-0 pr-0">
-        <div class="card mt-3 mb-2 border-none text-center">
-          <h4>Gestion de stock</h4>
-          <small class="form-text text-muted">By Ali Bouali</small>
-        </div>
-        <div>
-          <app-menu/>
-        </div>
-      </div>
-    </div>
-    }
+  <div class="main-content" [style.margin-left]="sidebarOpen ? '280px' : '80px'">
+    <app-header (toggleSidebar)="toggleSidebar()" (toggleTheme)="toggleTheme()"></app-header>
 
-    <!-- Content -->
-    <div class="card pl-0 pr-0 background-grey border-none"
-         [ngClass]="showSidebar ? 'col-md-10 col-12' : 'col-md-12 col-12'">
-      <div class="col pl-0 pr-0 d-flex flex-column justify-content-between h-100">
-
-        <!-- Header avec bouton -->
-        <div class="card p-3 min-height-80 mb-2 d-flex justify-content-center align-items-center">
-          <button class="btn btn-sm btn-primary"
-                  type="button"
-                  (click)="toggleSidebar()">
-            {{ showSidebar ? 'Masquer menu' : 'Afficher menu' }}
-          </button>
-        </div>
-
-        <!-- Main content -->
-        <div class="card mb-2 flex-grow-1">
-          <router-outlet></router-outlet>
-        </div>
-
-        <!-- Footer -->
-        <div class="card min-height-80">
-          footer
-        </div>
-      </div>
+    <div class="content-wrapper">
+      <app-content></app-content>
     </div>
 
+    <app-footer></app-footer>
   </div>
 </div>
