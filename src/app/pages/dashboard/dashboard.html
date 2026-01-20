@@ -1,8 +1,19 @@
 <div class="dashboard">
-  <app-sidebar [collapsed]="!sidebarOpen"></app-sidebar>
+  <app-sidebar
+    [collapsed]="!isMobile && collapsed"
+    [class.open]="isMobile && sidebarOpen">
+  </app-sidebar>
 
-  <div class="main-content" [style.margin-left]="sidebarOpen ? '280px' : '80px'">
-    <app-header (toggleSidebar)="toggleSidebar()" (toggleTheme)="toggleTheme()"></app-header>
+  @if (isMobile && sidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <div class="main-content"
+       [style.margin-left]="isMobile ? '0' : (collapsed ? '80px' : '280px')">
+    <app-header
+      (toggleSidebar)="toggleSidebar()"
+      (toggleTheme)="toggleTheme()">
+    </app-header>
 
     <div class="content-wrapper">
       <app-content></app-content>

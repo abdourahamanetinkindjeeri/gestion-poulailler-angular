@@ -1,15 +1,111 @@
+/* ====== DASHBOARD LAYOUT ====== */
 .dashboard {
   display: flex;
+  min-height: 100vh; /* occupe toute la hauteur */
 }
 
+/* ====== MAIN CONTENT ====== */
 .main-content {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* occupe toute la hauteur de l'écran */
+  flex: 1; /* prend tout l’espace restant */
+  height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
+/* Desktop : sidebar élargie */
+.main-content.with-sidebar {
+  margin-left: 280px;
+}
+
+/* Desktop : sidebar réduite */
+.main-content.collapsed {
+  margin-left: 80px;
+}
+
+/* Zone scrollable */
 .content-wrapper {
-  flex: 1; /* prend tout l’espace restant */
-  overflow-y: auto; /* permet le scroll si le contenu est trop grand */
-  padding: 1rem; /* optionnel pour l’espacement */
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  height: 100vh;
+  transition: width 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* Mode collapsed (desktop) */
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Mode élargi (desktop) */
+.sidebar:not(.collapsed) {
+  width: 280px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important; /* pas de décalage sur mobile */
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Overlay mobile */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+}
+
+/* ====== PETITS SMARTPHONES ====== */
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 0.5rem;
+  }
+
+  .menu-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .search-bar input {
+    font-size: 14px;
+    padding: 8px 10px 8px 32px;
+  }
+
+  .sidebar {
+    width: 100%; /* occupe toute la largeur */
+  }
 }
