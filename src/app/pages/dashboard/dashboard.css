@@ -1,0 +1,15 @@
+.dashboard {
+  display: flex;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* occupe toute la hauteur de l'écran */
+}
+
+.content-wrapper {
+  flex: 1; /* prend tout l’espace restant */
+  overflow-y: auto; /* permet le scroll si le contenu est trop grand */
+  padding: 1rem; /* optionnel pour l’espacement */
+}

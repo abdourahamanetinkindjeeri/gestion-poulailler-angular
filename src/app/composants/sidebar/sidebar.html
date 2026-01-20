@@ -1,40 +1,71 @@
 <aside class="sidebar" [class.collapsed]="collapsed">
   <!-- HEADER -->
   <div class="sidebar-header">
-    <div class="logo-container">
-      <div class="logo">
+    <div class="logo-container d-flex align-items-center">
+      <div class="logo d-flex align-items-center justify-content-center">
         <i class="fas fa-box"></i>
       </div>
       <div class="logo-text" *ngIf="!collapsed">
         <h2>Gestion de stock</h2>
-        <p>By Ali Bouali</p>
+        <p>By Jeeri</p>
       </div>
     </div>
   </div>
 
   <!-- NAVIGATION -->
   <nav class="sidebar-nav">
-    <div class="nav-section" *ngFor="let section of navSections">
-      <div class="nav-section-title" *ngIf="!collapsed">{{ section.title }}</div>
-
-      <div class="nav-item"
-           *ngFor="let item of section.items"
-           [attr.title]="collapsed ? item.label : null">
-        <i [class]="item.icon"></i>
-        <span class="nav-label" *ngIf="!collapsed">{{ item.label }}</span>
+    <ng-container *ngFor="let menu of menuList">
+      <!-- Menu principal -->
+      <div class="nav-item d-flex align-items-center justify-content-between"
+           [ngClass]="{'active': menu.active}"
+           (click)="menu.sousMenu ? toggleMenu(menu) : navigate(menu)"
+           [attr.title]="collapsed ? menu.titre : null">
+        <div class="d-flex align-items-center">
+          <i [class]="menu.icon"></i>
+          <span class="ms-2" *ngIf="!collapsed">{{ menu.titre }}</span>
+        </div>
+        <i class="fas fa-chevron-down" *ngIf="menu.sousMenu && !collapsed"
+           [ngClass]="{'rotate-180': menu.open}"></i>
       </div>
-    </div>
+
+      <!-- Sous-menu récursif -->
+      @if(menu.sousMenu && menu.open){
+      <div class="sub-menu">
+        <ng-container *ngFor="let sub of menu.sousMenu">
+          <div class="nav-item d-flex align-items-center ms-3"
+               [ngClass]="{'active': sub.active}"
+               (click)="navigate(sub)"
+               [attr.title]="collapsed ? sub.titre : null">
+            <i [class]="sub.icon"></i>
+            <span class="ms-2" *ngIf="!collapsed">{{ sub.titre }}</span>
+          </div>
+
+          <!-- Sous-sous-menu (récursif si nécessaire) -->
+          <ng-container *ngIf="sub.sousMenu && sub.open">
+            <div *ngFor="let sub2 of sub.sousMenu" class="nav-item d-flex align-items-center ms-4"
+                 [ngClass]="{'active': sub2.active}"
+                 (click)="navigate(sub2)"
+                 [attr.title]="collapsed ? sub2.titre : null">
+              <i [class]="sub2.icon"></i>
+              <span class="ms-2" *ngIf="!collapsed">{{ sub2.titre }}</span>
+            </div>
+          </ng-container>
+
+        </ng-container>
+      </div>
+      }
+    </ng-container>
   </nav>
 
   <!-- FOOTER -->
-  <div class="sidebar-footer" *ngIf="!collapsed">
-    <div class="user-profile">
-      <div class="user-avatar">AB</div>
+  <div class="sidebar-footer mt-auto" *ngIf="!collapsed">
+    <div class="user-profile d-flex align-items-center gap-2 p-2">
+      <div class="user-avatar d-flex align-items-center justify-content-center">AB</div>
       <div class="user-info">
         <div class="user-name">Ali Bouali</div>
         <div class="user-role">Administrateur</div>
       </div>
-      <i class="fas fa-ellipsis-v" style="color: var(--text-muted)"></i>
+      <i class="fas fa-ellipsis-v text-muted"></i>
     </div>
   </div>
 </aside>
